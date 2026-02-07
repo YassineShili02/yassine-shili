@@ -1,0 +1,25 @@
+pipeline { 
+    agent any 
+ 
+    tools { 
+        jdk 'JAVA_HOME' 
+        maven 'M2_HOME' 
+    } 
+ 
+    stages { 
+ 
+        stage('GIT') { 
+            steps { 
+                git branch: 'main', 
+                     credentialsId: 'github-token', 
+                     url: 'https://github.com/YassineShili02/yassine-shili.git' 
+            } 
+        } 
+ 
+        stage('Compile Stage') { 
+            steps { 
+                sh 'mvn clean compile' 
+            } 
+        } 
+    } 
+}  
